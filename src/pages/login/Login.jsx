@@ -5,7 +5,7 @@ function Login() {
   return (
     <div className="login bg-[url(/background.png)] h-screen flex items-center">
       <div>
-        <img src={Assests.logo} alt="" />
+        <img src={Assests.logo} alt="logo" />
       </div>
     </div>
   );
