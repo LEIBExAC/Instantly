@@ -7,16 +7,16 @@ function LeftSideBar() {
       <div className="ls-top p-2">
         <div className="ls-nav flex justify-between items-center mb-7">
           <img src={assets.logo} alt="" className="logo max-w-32" />
-          <div className="menu relative py-2">
+          <div className="menu relative py-2 group">
             <img
               src={assets.menu_icon}
               alt=""
               className="max-h-5 opacity-5 cursor-pointer"
             />
 
-            <div className="sub-menu absolute top-full right-0 w-32 p-5 rounded-xl bg-white text-black">
+            <div className="sub-menu absolute top-full right-0 w-32 p-5 rounded-xl bg-white text-black hidden group-hover:block">
               <p className="text-[0.95rem] cursor-pointer">Edit Profile</p>
-              <hr className="bg-[#a4a4a4] my-2"/>
+              <hr className="bg-[#a4a4a4] my-2" />
               <p className="text-[0.95rem] cursor-pointer">Log Out</p>
             </div>
           </div>

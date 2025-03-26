@@ -1,5 +1,6 @@
 import React from "react";
 import assets from "../../assets/assets";
+import { logout } from "../../config/firebase";
 
 function RightSideBar() {
   return (
@@ -53,7 +54,10 @@ function RightSideBar() {
         </div>
       </div>
 
-      <button className="absolute h-4 bottom-5 flex items-center justify-center text-center left-[30%]  bg-[#077eff] text-white text-[0.75rem] font-extralightt px-7 py-4 rounded-2xl cursor-pointer">
+      <button
+        onClick={() => logout()}
+        className="absolute h-4 bottom-5 flex items-center justify-center text-center left-[30%]  bg-[#077eff] text-white text-[0.75rem] font-extralightt px-7 py-4 rounded-2xl cursor-pointer"
+      >
         Log Out
       </button>
     </div>
