@@ -31,15 +31,18 @@ function LeftSideBar() {
         const userRef = collection(db, "users");
         const q = query(userRef, where("username", "==", input.toLowerCase()));
         const querySnap = await getDocs(q);
+        console.log("Hello");
         if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
           let userExist = false;
           chatData.map((user) => {
             if (user.rId === querySnap.docs[0].data().id) {
+              console.log(user + " 1 ");
               userExist = true;
             }
           });
           if (!userExist) {
             setUser(querySnap.docs[0].data());
+            // setTimeout(() => console.log(user), 4000);
           }
         } else {
           setUser(null);
@@ -57,8 +60,9 @@ function LeftSideBar() {
     const chatsRef = collection(db, "chats");
     try {
       const newMessageRef = doc(messageRef);
+
       await setDoc(newMessageRef, {
-        createAt: serverTimestamp(),
+        createdAt: serverTimestamp(),
         messages: [],
       });
 
