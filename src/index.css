@@ -12,6 +12,14 @@
     sans-serif;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
+}
+
+.friends.border img {
+  border: 2px solid #07fff3;
+}
+
+.friends.border div span {
+  color: #07fff3;
 }

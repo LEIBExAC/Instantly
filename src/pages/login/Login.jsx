@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Assests from "../../assets/assets";
-import { signup, login } from "../../config/firebase";
+import { signup, login, resetPass } from "../../config/firebase";
 
 function Login() {
   const [currentState, setState] = useState("Sign Up");
@@ -18,7 +18,7 @@ function Login() {
   };
 
   return (
-    <div className="login bg-[url(/background.png)] h-screen flex items-center justify-evenly ">
+    <div className="login bg-[url(/background.png)] h-screen flex items-center justify-evenly max-md:flex max-md:flex-col max-md:justify-center max-md:gap-7">
       <img src={Assests.logo_big} alt="Instantly Logo" className="max-h-56" />
 
       <div className="bg-white flex flex-col rounded-xl py-6 px-7 gap-5">
@@ -103,6 +103,17 @@ function Login() {
               </span>
             </p>
           )}
+          {currentState === "Log In" ? (
+            <p className="text-gray-700 text-sm">
+              Forgot Password?{" "}
+              <span
+                onClick={() => resetPass(email)}
+                className="text-blue-700 cursor-pointer"
+              >
+                Reset here
+              </span>
+            </p>
+          ) : null}
         </form>
       </div>
     </div>
