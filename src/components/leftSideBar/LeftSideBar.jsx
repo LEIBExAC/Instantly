@@ -42,7 +42,7 @@ function LeftSideBar() {
         const userRef = collection(db, "users");
         const q = query(userRef, where("username", "==", input.toLowerCase()));
         const querySnap = await getDocs(q);
-        // console.log("Hello");
+        console.log("Hello");
         if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
           let userExist = false;
           chatData.map((user) => {
@@ -53,7 +53,7 @@ function LeftSideBar() {
           });
           if (!userExist) {
             setUser(querySnap.docs[0].data());
-            // setTimeout(() => console.log(user), 4000);
+            setTimeout(() => console.log(user), 4000);
           }
         } else {
           setUser(null);
