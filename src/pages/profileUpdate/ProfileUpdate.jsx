@@ -87,75 +87,74 @@ function ProfileUpdate() {
   }, []);
 
   return (
-    <div className="profile min-h-dvh bg-[url(/background.png)] bg-no-repeat flex items-center justify-center bg-cover">
-      <div className="profile-container bg-white flex items-center justify-center min-w-3xl rounded-lg">
-        <form
-          action=""
-          onSubmit={profileUpdate}
-          className="flex flex-col gap-5 p-10 "
-        >
-          <h3 className="font-semibold">Profile Details</h3>
-          <label
-            htmlFor="avatar"
-            className="flex items-center gap-5 text-gray-500 cursor-pointer"
-          >
-            <input
-              type="file"
-              id="avatar"
-              accept=".png, .jpg, .jpeg"
-              onChange={(e) => setImage(e.target.files[0])}
-              hidden
-            />
-            <img
-              src={
-                image
-                  ? URL.createObjectURL(image)
-                  : prevImage
-                  ? prevImage
-                  : assets.avatar_icon
-              }
-              alt=""
-              className="w-16 aspect-square rounded-full"
-            />
-            Edit Profile Image
-          </label>
+    <div className="login h-screen flex flex-col items-center justify-center bg-gray-purple-shading-dark py-6 overflow-y-hidden">
+      <div className="logo">
+        <img src={assets.logo} alt="logo" className="max-w-[20rem] max-h-[3rem] absolute top-6 left-6" />
+      </div>
 
-          <input
-            type="text"
-            placeholder="Your Name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            className="p-2 min-w-80 border border-[#c9c9c9] outline outline-[#077EFF] rounded-sm"
-            required
-          />
-          <textarea
-            name="your-bio"
-            id="bio"
-            placeholder="Tell others about yourself...."
-            onChange={(e) => setBio(e.target.value)}
-            value={bio}
-            className="p-4 pt-2 pl-2 min-w-80 border border-[#c9c9c9] outline outline-[#077EFF] rounded-sm"
-          ></textarea>
+      <div className="bg-[url(/background.png)] bg-center h-full w-full aspect-square bg-contain bg-no-repeat mx-14 my-12 flex items-center justify-center rounded-3xl">
+        <div className="profile-container bg-[#dbbeec1c] bg-opacity-80 backdrop-blur-xs flex flex-col items-center justify-center min-w-2xl rounded-lg ">
+          <h3 className="font-semibold text-light-gray text-2xl text-center mt-4">Profile Details</h3>
 
-          <button
-            type="submit"
-            className="text-white bg-[#077EFF] p-2 cursor-pointer rounded-sm"
-          >
-            Save Details
-          </button>
-        </form>
+          <div className="flex items-center justify-center gap-5 flex-wrap">
+            <label
+              htmlFor="avatar"
+              className="flex flex-col items-center gap-5 text-light-gray cursor-pointer"
+            >
+              <input
+                type="file"
+                id="avatar"
+                accept=".png, .jpg, .jpeg"
+                onChange={(e) => setImage(e.target.files[0])}
+                hidden
+              />
+              <img
+                src={
+                  image
+                    ? URL.createObjectURL(image)
+                    : prevImage
+                      ? prevImage
+                      : assets.avatar_icon1
+                }
+                alt=""
+                className="w-28 aspect-square rounded-full"
+              />
+              Edit Profile Image
+            </label>
 
-        <img
-          src={
-            image
-              ? URL.createObjectURL(image)
-              : prevImage
-              ? prevImage
-              : assets.logo_icon
-          }
-          alt=""
-          className="profile-pic aspect-square max-w-40 rounded-full mx-5 "
-        />
+            <form
+              action=""
+              onSubmit={profileUpdate}
+              className="flex flex-col gap-5 p-10 "
+            >
+
+
+              <input
+                type="text"
+                placeholder="Your Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                className="p-2 min-w-80 border outline bg-[#efe8f1ef] border-gray-400 outline-chat-purple placeholder:text-light-gray-text rounded-sm"
+                required
+              />
+              <textarea
+                name="your-bio"
+                id="bio"
+                placeholder="Tell others about yourself...."
+                onChange={(e) => setBio(e.target.value)}
+                value={bio}
+                className="p-4 pt-2 pl-2 min-w-80 border outline bg-[#efe8f1ef] border-gray-400 outline-chat-purple placeholder:text-light-gray-text rounded-sm"
+              ></textarea>
+
+              <button
+                type="submit"
+                className="text-chat-purple bg-gray-purple-shading-dark p-2 cursor-pointer rounded-sm"
+              >
+                Save Details
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

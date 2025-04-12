@@ -15,9 +15,11 @@ import add_icon from './add_icon.png'
 import menu_icon from './menu_icon.png'
 import arrow_icon from './arrow_icon.png'
 import green_dot from './green_dot.png'
+import avatar_icon1 from './avatar_icon1.png'
 
 const assets = {
     avatar_icon,
+    avatar_icon1,
     gallery_icon,
     help_icon,
     logo_big,
