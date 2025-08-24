@@ -21,6 +21,8 @@ function ChatBox() {
     setMessages,
     chatVisible,
     setChatVisible,
+    rightSideBarVisible,
+    setRightSideBarVisible,
   } = useContext(AppContext);
   const [input, setInput] = useState("");
 
@@ -151,27 +153,30 @@ function ChatBox() {
 
   return chatUser ? (
     <div
-      className={`chat-box bg-amber-50 text-black px-2 py-3 h-full w-full relative max-md:rounded-xl max-md:w-full max-md:justify-center ${
-        chatVisible ? "" : "max-md:hidden"
-      }`}
+      className={`chat-box bg-gray-purple-shading-dark  text-black h-dvh w-full flex flex-col flex-nowrap max-md:w-full max-md:justify-center ${chatVisible ? "" : "max-md:hidden"
+        } ${!rightSideBarVisible ? "" : "max-md:hidden"}`}
     >
-      <div className="chat-user px-1.5 py-2.5 flex items-center gap-2.5 border-b border-b-gray-300 ">
-        <img
-          src={chatUser.userData.avatar}
-          alt=""
-          className="w-8 rounded-[50%] first:w-9 aspect-square"
-        />
-        <p className="flex-[1] font-bold text-[#393939] flex items-center gap-1.5">
-          {chatUser.userData.name}{" "}
-          {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
-            <img src={assets.green_dot} alt="" className="dot w-3.5 " />
-          ) : null}
-        </p>
+      <div className="chat-user px-2.5 py-1.5 bg-mid-gray flex items-center gap-2.5 rounded-b-xl shadow-md max-md:rounded-b-xl">
+        <div className="flex items-center w-full gap-2.5" onClick={() => {
+          setRightSideBarVisible(!rightSideBarVisible);
+        }}>
+          <img
+            src={chatUser.userData.avatar}
+            alt=""
+            className="w-8 rounded-[50%] first:w-9 aspect-square"
+          />
+          <p className="flex-[1] font-bold text-amber-100 flex items-center gap-1.5">
+            {chatUser.userData.name}{" "}
+            {Date.now() - chatUser.userData.lastSeen <= 70000 ? (
+              <img src={assets.green_dot} alt="" className="dot w-3.5 " />
+            ) : null}
+          </p>
+        </div>
         <img src={assets.help_icon} className="help w-5 max-md:hidden" alt="" />
         <img src={assets.arrow_icon} onClick={() => setChatVisible(false)} className="arrow hidden max-w-6 max-md:block" alt="" />
       </div>
 
-      <div className="chat-msg h-[83%] pb-12 overflow-y-scroll flex flex-col-reverse">
+      <div className="chat-msg grow px-3 overflow-y-scroll flex flex-col-reverse">
         {messages ? (
           messages.map((msg, index) => {
             return (
@@ -187,7 +192,7 @@ function ChatBox() {
                   <div
                     className={
                       msg.sId === userData.id
-                        ? "s-msg-image flex items-end justify-end gap-1.5 py-3.5"
+                        ? "s-msg-image flex items-center justify-end gap-1.5 py-3.5"
                         : "r-msg-image flex items-end gap-1.5 py-3.5 flex-row-reverse justify-end"
                     }
                   >
@@ -195,8 +200,8 @@ function ChatBox() {
                       src={msg.image}
                       className={
                         msg.sId === userData.id
-                          ? "msg-img max-w-[18rem] rounded-2xl rounded-br-none mb-6"
-                          : "msg-img max-w-[18rem] rounded-2xl rounded-bl-none mb-6"
+                          ? "msg-img max-w-[18rem] rounded-2xl rounded-br-sm"
+                          : "msg-img max-w-[18rem] rounded-2xl rounded-bl-sm"
                       }
                       alt=""
                     />{" "}
@@ -205,8 +210,8 @@ function ChatBox() {
                   <p
                     className={
                       msg.sId === userData.id
-                        ? "msg text-white bg-[#077fffc2] p-2 text-sm font-medium rounded-2xl rounded-br-none mr-1 mb-6"
-                        : "msg text-white bg-[#1f4f83ad] p-2 text-sm font-medium rounded-2xl rounded-br-none mr-1 mb-6"
+                        ? "msg text-white bg-gray-Purple-shading-light p-2 text-sm font-medium rounded-2xl rounded-br-md mr-1 mb-2"
+                        : "msg text-gray-purple-shading-dark bg-light-gray p-2 text-sm font-medium rounded-2xl rounded-bl-md mr-1 mb-2"
                     }
                   >
                     {msg.text}
@@ -221,11 +226,11 @@ function ChatBox() {
                         : chatUser.userData.avatar
                     }
                     alt=""
-                    className="w-8 rounded-full aspect-square mb-1"
+                    className={`w-8 rounded-full aspect-square mb-1 `}
                   />
-                  <p className="text-gray-800 text-[0.65rem]">
+                  {/* <p className="text-amber-50 text-[0.65rem]">
                     {convertTimestamp(msg.createdAt)}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             );
@@ -235,19 +240,7 @@ function ChatBox() {
         )}
       </div>
 
-      <div className="chat-input flex items-center gap-3 px-2.5 py-3.5 bg-white absolute bottom-0 right-0 left-0 max-md:rounded-xl">
-        <input
-          onChange={(e) => setInput(e.target.value)}
-          value={input}
-          type="text"
-          placeholder="Type a Message"
-          className=" placeholder:text-sm flex-[1] outline-none"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage();
-            }
-          }}
-        />
+      <div className="chat-input flex items-center gap-3 px-2.5 py-3.5 max-md:rounded-t-xl">
         <input
           onChange={sendImage}
           type="file"
@@ -256,6 +249,7 @@ function ChatBox() {
           accept="image/png, image/jgp"
           hidden
         />
+
         <label htmlFor="image" className="flex ">
           <img
             src={assets.gallery_icon}
@@ -263,22 +257,38 @@ function ChatBox() {
             className="w-7 cursor-pointer"
           />
         </label>
-        <img
-          src={assets.send_button}
-          onClick={sendMessage}
-          alt=""
-          className="w-7 cursor-pointer"
-        />
+
+        <div className="flex items-center gap-2.5 w-full bg-gray-Purple-shading-light px-3 py-2 rounded-xl shadow-md ">
+          <input
+            onChange={(e) => setInput(e.target.value)}
+            value={input}
+            type="text"
+            placeholder="Type a Message"
+            className=" placeholder:text-sm placeholder:text-dark-color flex-[1] outline-none text-sm text-gray-purple-shading-dark"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
+          />
+
+          <img
+            src={assets.send_button}
+            onClick={sendMessage}
+            alt=""
+            className="w-7 cursor-pointer"
+          />
+        </div>
+
       </div>
     </div>
   ) : (
     <div
-      className={`chat-welcome w-full flex flex-col items-center justify-center gap-2 ${
-        chatVisible ? "" : "max-md:hidden"
-      }`}
+      className={`chat-welcome w-full flex bg-gray-purple-shading-dark h-full flex-col items-center justify-center gap-2 ${chatVisible ? "" : "max-md:hidden"
+        }`}
     >
-      <img src={assets.logo_icon} alt="" className="w-16" />
-      <p className="text-xl font-medium text-[#383838]">Chat Instantly</p>
+      <img src={assets.logo_icon} alt="" className="w-32 opacity-75" />
+      <p className="text-4xl font-medium text-[#e4e2e2]">Chat Instantly</p>
     </div>
   );
 }

@@ -150,14 +150,13 @@ function LeftSideBar() {
 
   return (
     <div
-      className={`ls bg-chat-purple text-amber-50 px-2 py-3 h-full rounded-l-2xl w-1/2 flex flex-col max-md:w-full ${
-        chatVisible ? "max-md:hidden" : ""
-      }`}
+      className={`ls bg-mid-gray text-amber-50 px-2 py-3 h-full min-w-xs max-w-xs flex flex-col max-md:w-full shadow-[rgba(0,0,15,0.5)_10px_50px_4px_0px] border-r rounded-r-md ${chatVisible ? "max-md:hidden" : "max-md:max-w-dvw"
+        }`}
     >
       <div className="ls-top p-2">
-        <div className="ls-nav flex justify-between items-center mb-7">
+        <div className="ls-nav flex justify-between items-center mb-3">
           <img src={assets.logo} alt="" className="logo max-w-32" />
-          <div className="menu relative py-2 group">
+          {/* <div className="menu relative py-2 group">
             <img
               src={assets.menu_icon}
               alt=""
@@ -176,26 +175,29 @@ function LeftSideBar() {
               <hr className="bg-[#a4a4a4] my-2" />
               <p className="text-[0.95rem] cursor-pointer">Log Out</p>
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="ls-search bg-search-chat flex items-center gap-3 px-2 py-3 mt-5 rounded-lg">
+        <hr className="bg-light-gray" />
+
+        <div className="ls-search bg-light-gray bg-search-chat flex items-center gap-3 px-2 py-2 mt-5 mx-2 rounded-lg shadow-2md">
           <img src={assets.search_icon} alt="" className="w-4" />
           <input
             type="text"
-            placeholder="Search here"
+            placeholder="Search"
             name=""
             id=""
             onChange={inputHandler}
-            className="bg-transparent text-white text-sm placeholder:text-[#c8c8c8] outline-none"
+            className=" text-dark-color text-sm placeholder:text-light-color outline-none "
           />
         </div>
       </div>
-      <div className="ls-list flex flex-col h-[52%] overflow-hidden overflow-y-scroll mt-7">
+
+      <div className="ls-list flex flex-col h-[80%] overflow-hidden overflow-y-scroll mt-7">
         {showSearch && user ? (
           <div
             onClick={addChat}
-            className="friends add-user flex items-center gap-2.5 px-2.5 py-2 cursor-pointer text-[0.95rem] hover:bg-[#077EFF] rounded-xl"
+            className="friends add-user flex items-center gap-2.5 px-2.5 py-2 cursor-pointer text-[0.95rem] hover:bg-[#845d9b] rounded-xl"
           >
             <img
               src={user.avatar}
@@ -209,11 +211,10 @@ function LeftSideBar() {
             <div
               onClick={() => setChat(item)}
               key={index}
-              className={`friends flex items-center gap-2.5 px-2.5 py-2 cursor-pointer text-[0.95rem] hover:bg-[#077EFF] rounded-xl border-none ${
-                item.messageSeen || item.messageId === messagesId
-                  ? ""
-                  : "border"
-              }`}
+              className={`friends flex items-center bg-gray-200 text-black gap-2.5 px-2.5 py-1 my-0.5 cursor-pointer text-[0.95rem] hover:bg-[#604470] rounded-xl border-none ${item.messageSeen || item.messageId === messagesId
+                ? ""
+                : "border"
+                }`}
             >
               <img
                 src={item.userData.avatar}

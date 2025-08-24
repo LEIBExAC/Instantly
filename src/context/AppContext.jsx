@@ -12,6 +12,7 @@ const AppContextProvider = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatUser, setChatUser] = useState(null);
   const [chatVisible, setChatVisible] = useState(false);
+  const [rightSideBarVisible, setRightSideBarVisible] = useState(false);
   const navigate = useNavigate();
 
   const loadUserData = async (uid) => {
@@ -76,6 +77,8 @@ const AppContextProvider = (props) => {
     setChatUser,
     chatVisible,
     setChatVisible,
+    rightSideBarVisible,
+    setRightSideBarVisible,
   };
 
   return (

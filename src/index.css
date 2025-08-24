@@ -9,7 +9,10 @@
   --color-mid-gray: #4c495d;
   --color-light-gray: #d1d7e0;
   --color-dark-color: #2f1b48;
+  --color-light-color: #6d43a1;
   --color-light-gray-text: #AAA9AF;
+
+  --font-roboto: "Roboto"
 }
 
 * {
@@ -24,9 +27,9 @@
 }
 
 .friends.border img {
-  border: 2px solid #07fff3;
+  border: 2px solid #9420d6;
 }
 
 .friends.border div span {
-  color: #07fff3;
+  color: #9420d6;
 }

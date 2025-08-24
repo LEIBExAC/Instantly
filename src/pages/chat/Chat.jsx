@@ -5,7 +5,7 @@ import RightSideBar from "../../components/rightSideBar/RightSideBar";
 import { AppContext } from "../../context/AppContext";
 
 function Chat() {
-  const { chatData, userData } = useContext(AppContext);
+  const { chatData, userData, rightSideBarVisible } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,15 +13,22 @@ function Chat() {
       setLoading(false);
     }
   }, [chatData, userData]);
+
   return (
-    <div className="chat min-h-dvh bg-gradient-to-r from-blue-300 to-indigo-600 grid place-items-center overflow-hidden">
+    <div className="chat min-h-dvh grid place-items-center">
       {loading ? (
-        <p className="loading text-white text-5xl max-md:text-3xl">Loading...</p>
+        <div className="loading-screen h-screen w-screen flex items-center justify-center bg-gray-purple-shading-dark py-6 ">
+          <div className="bg-[url(/background.png)] bg-center h-full w-full aspect-square bg-contain bg-no-repeat mx-14 my-12 flex items-center justify-center rounded-3xl">
+            <div className="loading-container max-w-2xl rounded-2xl py-6 px-67 gap-5 bg-[#dbbeec1c] bg-opacity-80 backdrop-blur-xs">
+              <h2 className="loading text-light-gray text-6xl font-roboto max-md:text-3xl">Loading...</h2>
+            </div>
+          </div>
+        </div>
       ) : (
-        <div className="chat-container bg-amber-50 w-[80dvw] h-[90dvh] flex justify-between items-center rounded-2xl max-md:flex">
+        <div className="chat-container bg-gray-Purple-shading-light h-full w-full flex justify-between items-center max-md:flex">
           <LeftSideBar />
           <ChatBox />
-          <RightSideBar />
+          {rightSideBarVisible && <RightSideBar />}
         </div>
       )}
     </div>
